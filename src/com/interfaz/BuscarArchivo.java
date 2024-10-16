@@ -36,7 +36,7 @@ public class BuscarArchivo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(MenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 90, 30));
+        jPanel1.add(MenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 90, 40));
         jPanel1.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 160, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/CargarRedVetana.png"))); // NOI18N
