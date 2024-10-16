@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.menu;
+package com.interfaz;
 
 /**
  *
  * @author xc2do
  */
-public class Menu extends javax.swing.JFrame {
+public class Inicio extends javax.swing.JFrame {
 
     /**
-     * Creates new form Menu
+     * Creates new form Inicio
      */
-    public Menu() {
+    public Inicio() {
         initComponents();
     }
 
@@ -27,8 +27,8 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        CargarButton = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        startButton = new javax.swing.JLabel();
+        bg1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -37,19 +37,20 @@ public class Menu extends javax.swing.JFrame {
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CargarButton.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
-        CargarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CargarButton.setText("CARGAR RED");
-        bg.add(CargarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 240, 40));
+        startButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/StartButtonnotbg.png"))); // NOI18N
+        startButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        bg.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 800, 170));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/MenuDef.png"))); // NOI18N
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/CoberturaDeSucursalesInicio.png"))); // NOI18N
+        bg1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        bg.add(bg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 800, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 794, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,27 +78,27 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new Inicio().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CargarButton;
     private javax.swing.JPanel bg;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel bg1;
+    private javax.swing.JLabel startButton;
     // End of variables declaration//GEN-END:variables
 }
