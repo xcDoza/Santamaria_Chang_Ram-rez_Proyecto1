@@ -8,18 +8,18 @@ package com.sucursales;
  *
  * @author xc2do
  */
-public class Nodo {
+public class Nodo<T> {
 
     private Nodo next, previous;
-    private Object element;
+    private T element;
 
-    public Nodo(Object element) {
+    public Nodo(T element) {
         this.next = null;
         this.previous = null;
         this.element = element;
     }
 
-    public Nodo getNext() {
+    public Nodo<T> getNext() {
         return next;
     }
 
@@ -27,7 +27,7 @@ public class Nodo {
         this.next = next;
     }
 
-    public Nodo getPrevious() {
+    public Nodo<T> getPrevious() {
         return previous;
     }
 
@@ -35,11 +35,11 @@ public class Nodo {
         this.previous = previous;
     }
 
-    public Object getElement() {
+    public T getElement() {
         return element;
     }
 
-    public void setElement(Object element) {
+    public void setElement(T element) {
         this.element = element;
     }
 

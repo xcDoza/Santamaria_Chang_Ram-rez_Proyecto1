@@ -8,9 +8,9 @@ package com.sucursales;
  *
  * @author xc2do
  */
-public class Lista {
+public class Lista<T> {
 
-    private Nodo head, tail;
+    private Nodo<T> head, tail;
     private int size;
 
     public Lista() {
@@ -19,19 +19,19 @@ public class Lista {
         this.size = 0;
     }
 
-    public Nodo getHead() {
+    public Nodo<T> getHead() {
         return head;
     }
 
-    public void setHead(Nodo head) {
+    public void setHead(Nodo<T> head) {
         this.head = head;
     }
 
-    public Nodo getTail() {
+    public Nodo<T> getTail() {
         return tail;
     }
 
-    public void setTail(Nodo tail) {
+    public void setTail(Nodo<T> tail) {
         this.tail = tail;
     }
 
@@ -52,4 +52,18 @@ public class Lista {
         }
     }
 
+    // Agregar un elemento al final de la lista
+    public void agregar(T dato) {
+        Nodo<T> nuevoNodo = new Nodo<>(dato);
+
+        if (head == null) {
+            head = nuevoNodo;
+            tail = nuevoNodo;
+        } else {
+            head.setNext(nuevoNodo);
+            nuevoNodo.setPrevious(tail);
+            tail = nuevoNodo;
+        }
+        size++;
+    }
 }
