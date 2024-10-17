@@ -40,6 +40,6 @@ public class Linea {
 
     @Override
     public String toString() {
-        return "\nLinea:" + nombre + ", Estaciones: " + estaciones;
+        return "\nLinea: " + nombre + ", Estaciones: " + estaciones;
     }
 }

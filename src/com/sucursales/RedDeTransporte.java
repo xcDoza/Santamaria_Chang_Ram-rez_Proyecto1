@@ -40,6 +40,6 @@ public class RedDeTransporte {
 
     @Override
     public String toString() {
-        return "Red: " + nombreRed + "\nLineas:" + lineas;
+        return "Red: " + nombreRed + ", Lineas:" + lineas;
     }
 }
