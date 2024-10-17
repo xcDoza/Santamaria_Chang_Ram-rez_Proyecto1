@@ -41,7 +41,7 @@ public class Estacion {
     @Override
     public String toString() {
         if (conexion != null) {
-            return nombre + " con conexión a " + conexion;
+            return nombre + " con conexion a " + conexion;
         }
         return nombre;
     }

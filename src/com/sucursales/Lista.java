@@ -60,10 +60,27 @@ public class Lista<T> {
             head = nuevoNodo;
             tail = nuevoNodo;
         } else {
-            head.setNext(nuevoNodo);
+            tail.setNext(nuevoNodo);
             nuevoNodo.setPrevious(tail);
             tail = nuevoNodo;
         }
         size++;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        Nodo<T> actual = head;
+        while (actual != null) {
+            sb.append(actual.getElement()); // Llama al toString() del elemento
+            actual = actual.getNext();
+            if (actual != null) {
+                sb.append(", "); // Añadir coma si no es el último elemento
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

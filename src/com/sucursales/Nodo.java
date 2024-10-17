@@ -10,7 +10,7 @@ package com.sucursales;
  */
 public class Nodo<T> {
 
-    private Nodo next, previous;
+    private Nodo<T> next, previous;
     private T element;
 
     public Nodo(T element) {
