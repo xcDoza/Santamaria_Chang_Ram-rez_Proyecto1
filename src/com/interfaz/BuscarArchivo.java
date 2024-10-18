@@ -4,6 +4,12 @@
  */
 package com.interfaz;
 
+import com.sucursales.FileChooser;
+import com.sucursales.RedDeTransporte;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 /**
  *
  * @author xc2do
@@ -28,7 +34,7 @@ public class BuscarArchivo extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         MenuButton = new javax.swing.JLabel();
-        SearchButton = new javax.swing.JLabel();
+        BuscarButton = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -36,8 +42,22 @@ public class BuscarArchivo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MenuButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuButtonMouseClicked(evt);
+            }
+        });
         jPanel1.add(MenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 90, 40));
-        jPanel1.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 160, 60));
+
+        BuscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BuscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BuscarButtonMouseClicked(evt);
+            }
+        });
+        jPanel1.add(BuscarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 160, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/CargarRedVetana.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -56,6 +76,29 @@ public class BuscarArchivo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarButtonMouseClicked
+        FileChooser cargar = new FileChooser();
+        RedDeTransporte red = cargar.loadRedTransporte();
+        
+        UIManager.put("Panel.background", Color.YELLOW);  // Cambia el color de fondo del joptionpane// Esta vaina no funciona
+        
+        // Aquí puedes trabajar con la red de transporte cargada
+        if (red != null) {
+            JOptionPane.showMessageDialog(this, "La red de transporte ha sido cargada con éxito", "Carga Completa", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Red de transporte cargada con exito.");
+            System.out.println(red); // Esto mostrará la red y sus líneas
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al cargar la red de transporte", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error al cargar la red de transporte.");
+        }
+    }//GEN-LAST:event_BuscarButtonMouseClicked
+
+    private void MenuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuButtonMouseClicked
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MenuButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -93,8 +136,8 @@ public class BuscarArchivo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BuscarButton;
     private javax.swing.JLabel MenuButton;
-    private javax.swing.JLabel SearchButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

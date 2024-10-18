@@ -27,7 +27,8 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        startButton = new javax.swing.JLabel();
+        StartButton = new javax.swing.JLabel();
+        startButtonImage = new javax.swing.JLabel();
         bg1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -37,10 +38,18 @@ public class Inicio extends javax.swing.JFrame {
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        startButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/StartButtonnotbg.png"))); // NOI18N
-        startButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        bg.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 800, 170));
+        StartButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        StartButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                StartButtonMouseClicked(evt);
+            }
+        });
+        bg.add(StartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 250, 80));
+
+        startButtonImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        startButtonImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/StartButtonnotbg.png"))); // NOI18N
+        startButtonImage.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        bg.add(startButtonImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 800, 170));
 
         bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/CoberturaDeSucursalesInicio.png"))); // NOI18N
         bg1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -60,6 +69,12 @@ public class Inicio extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void StartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartButtonMouseClicked
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_StartButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -97,8 +112,9 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel StartButton;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel bg1;
-    private javax.swing.JLabel startButton;
+    private javax.swing.JLabel startButtonImage;
     // End of variables declaration//GEN-END:variables
 }

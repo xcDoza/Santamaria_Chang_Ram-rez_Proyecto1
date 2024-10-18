@@ -40,7 +40,13 @@ public class Menu extends javax.swing.JFrame {
         CargarButton.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         CargarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CargarButton.setText("CARGAR RED");
-        bg.add(CargarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 240, 40));
+        CargarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CargarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CargarButtonMouseClicked(evt);
+            }
+        });
+        bg.add(CargarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/MenuDef.png"))); // NOI18N
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
@@ -59,6 +65,12 @@ public class Menu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CargarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CargarButtonMouseClicked
+        BuscarArchivo cargarArchivo = new BuscarArchivo();
+        cargarArchivo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CargarButtonMouseClicked
 
     /**
      * @param args the command line arguments
