@@ -4,19 +4,26 @@
  */
 package com.sucursales;
 
+import static com.sucursales.Grafo.construirGrafo;
+
 /**
  *
  * @author xc2do
  */
 public class Main {
     public static void main(String[] args) {
-        FileChooser loader = new FileChooser();
-        RedDeTransporte red = loader.loadRedTransporte();
+        FileChooser fileChooser = new FileChooser();
+        RedDeTransporte red = fileChooser.loadRedTransporte();
 
-        // Aquí puedes trabajar con la red de transporte cargada
         if (red != null) {
-            System.out.println("Red de transporte cargada con exito.");
-            System.out.println(red); // Esto mostrará la red y sus líneas
+            System.out.println("Red de transporte cargada correctamente:");
+            System.out.println(red);
+            Grafo grafo = construirGrafo(red);
+            System.out.println("Grafo de la red de transporte:");
+            for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
+                System.out.println("Estacion: " + nodo.getElement().getNombre());
+                System.out.println("Conexiones: " + nodo.getElement().getConexiones());
+            }
         } else {
             System.out.println("Error al cargar la red de transporte.");
         }
