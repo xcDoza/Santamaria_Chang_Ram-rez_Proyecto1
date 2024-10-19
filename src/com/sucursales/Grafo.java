@@ -4,6 +4,9 @@
  */
 package com.sucursales;
 
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+
 /**
  *
  * @author xc2do
@@ -11,14 +14,18 @@ package com.sucursales;
 public class Grafo {
 
     private Lista<NodoGrafo> nodos; // Lista de estaciones (nodos)
+    private Graph graph;
 
     public Grafo() {
         this.nodos = new Lista<>();
+        this.graph = new SingleGraph("Grafo de Transporte");
     }
 
     // Añadir un nodo al grafo
     public void agregarNodo(NodoGrafo nodo) {
         nodos.agregar(nodo);
+        // Añadir el nodo a GraphStream
+        graph.addNode(nodo.getNombre()).setAttribute("ui.label", nodo.getNombre());
     }
 
     // Método para obtener la lista de nodos del grafo
@@ -30,6 +37,12 @@ public class Grafo {
     public void agregarArista(NodoGrafo origen, NodoGrafo destino) {
         origen.agregarConexion(destino);
         destino.agregarConexion(origen); // Si es un grafo no dirigido
+
+        // Añadir la arista a GraphStream
+        String edgeId = origen.getNombre() + "-" + destino.getNombre();
+        if (graph.getEdge(edgeId) == null && graph.getEdge(destino.getNombre() + "-" + origen.getNombre()) == null) {
+            graph.addEdge(edgeId, origen.getNombre(), destino.getNombre());
+        }
     }
 
     public NodoGrafo obtenerNodoPorNombre(String nombre) {
@@ -82,5 +95,10 @@ public class Grafo {
             }
         }
         return grafo;
+    }
+
+    public void visualizar() {
+        System.setProperty("org.graphstream.ui", "swing");
+        graph.display();
     }
 }

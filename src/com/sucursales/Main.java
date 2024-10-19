@@ -30,6 +30,8 @@ public class Main {
                 }
                 System.out.println();
             }
+            // Visualizar el grafo
+            grafo.visualizar();
         } else {
             System.out.println("Error al cargar la red de transporte.");
         }
