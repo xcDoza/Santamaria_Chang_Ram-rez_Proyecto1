@@ -38,7 +38,7 @@ public class Grafo {
                 return nodo.getElement();
             }
         }
-        return null;  // Retorna null si no encuentra el nodo
+        return null; // Retorna null si no encuentra el nodo
     }
 
     // Método para construir el grafo a partir de la RedDeTransporte
@@ -58,11 +58,15 @@ public class Grafo {
                     nodoActual = new NodoGrafo(estacion.getNombre());
                     grafo.agregarNodo(nodoActual);
                 }
+
+                // Imprimir diagnóstico
                 System.out.println("Procesando estacion: " + estacion.getNombre());
+
                 // Si la estación anterior en la línea no es nula, conectar las estaciones
                 if (nodoAnterior != null) {
                     grafo.agregarArista(nodoAnterior, nodoActual);
                 }
+
                 // Si la estación tiene una conexión (como Capitolio <-> El Silencio), crear también esa conexión
                 if (estacion.getConexion() != null) {
                     NodoGrafo nodoConectado = grafo.obtenerNodoPorNombre(estacion.getConexion());
@@ -72,6 +76,7 @@ public class Grafo {
                     }
                     grafo.agregarArista(nodoActual, nodoConectado);
                 }
+
                 // Mover al siguiente nodo
                 nodoAnterior = nodoActual;
             }

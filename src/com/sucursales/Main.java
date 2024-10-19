@@ -11,6 +11,7 @@ import static com.sucursales.Grafo.construirGrafo;
  * @author xc2do
  */
 public class Main {
+
     public static void main(String[] args) {
         FileChooser fileChooser = new FileChooser();
         RedDeTransporte red = fileChooser.loadRedTransporte();
@@ -22,7 +23,12 @@ public class Main {
             System.out.println("Grafo de la red de transporte:");
             for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
                 System.out.println("Estacion: " + nodo.getElement().getNombre());
-                System.out.println("Conexiones: " + nodo.getElement().getConexiones());
+                Lista<NodoGrafo> conexiones = nodo.getElement().getConexiones();
+                System.out.print("Conexiones: ");
+                for (Nodo<NodoGrafo> conexion = conexiones.getHead(); conexion != null; conexion = conexion.getNext()) {
+                    System.out.print(conexion.getElement().getNombre() + " ");
+                }
+                System.out.println();
             }
         } else {
             System.out.println("Error al cargar la red de transporte.");
