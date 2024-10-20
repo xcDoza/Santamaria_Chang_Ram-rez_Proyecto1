@@ -7,6 +7,7 @@ package com.sucursales;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.graph.Node;
+import org.graphstream.ui.view.Viewer;
 
 /**
  *
@@ -38,6 +39,9 @@ public class VisualizadorGrafo {
         }
 
         System.setProperty("org.graphstream.ui", "swing");
-        graph.display();
+        Viewer viewer = graph.display();
+        
+        //con esta linea evitamos que todas las ventanas se cierren al cerrar el grafo
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.interfaz;
 
+import com.sucursales.AlmacenRed;
 import com.sucursales.FileChooser;
 import com.sucursales.RedDeTransporte;
 import java.awt.Color;
@@ -86,6 +87,7 @@ public class BuscarArchivo extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.BLACK);  // Ya funciona pero se ve feo hayque arreglarlo
         // Aquí puedes trabajar con la red de transporte cargada
         if (red != null) {
+            AlmacenRed.setRedDeTransporte(red); //Esto es para guardar la red cargada y usarla en las otras ventanas y posibles modificaciones :)
             JOptionPane.showMessageDialog(this, "La red de transporte ha sido cargada con éxito", "Carga Completa", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Red de transporte cargada con exito.");
             System.out.println(red); // Esto mostrará la red y sus líneas

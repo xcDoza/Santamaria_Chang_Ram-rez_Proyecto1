@@ -4,6 +4,12 @@
  */
 package com.interfaz;
 
+import com.sucursales.AlmacenRed;
+import com.sucursales.Grafo;
+import com.sucursales.RedDeTransporte;
+import com.sucursales.VisualizadorGrafo;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xc2do
@@ -27,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
+        MostrarGrafo = new javax.swing.JLabel();
         CargarButton = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -36,6 +43,13 @@ public class Menu extends javax.swing.JFrame {
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MostrarGrafo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MostrarGrafoMouseClicked(evt);
+            }
+        });
+        bg.add(MostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 320, 40));
 
         CargarButton.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         CargarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,6 +85,20 @@ public class Menu extends javax.swing.JFrame {
         cargarArchivo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CargarButtonMouseClicked
+
+    private void MostrarGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MostrarGrafoMouseClicked
+        RedDeTransporte red = AlmacenRed.getRedDeTransporte();
+        if (red != null) {
+            System.out.println("Red de transporte recuperada:");
+            System.out.println(red);
+
+            Grafo grafo = Grafo.construirGrafo(red);
+            VisualizadorGrafo.visualizar(grafo);
+        } else {
+            System.out.println("No se ha cargado ninguna red de transporte.");
+            JOptionPane.showMessageDialog(this, "No se ha cargado ninguna red de transporte", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_MostrarGrafoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -109,6 +137,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CargarButton;
+    private javax.swing.JLabel MostrarGrafo;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
