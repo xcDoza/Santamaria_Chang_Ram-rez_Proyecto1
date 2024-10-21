@@ -12,10 +12,12 @@ public class RedDeTransporte {
 
     private String nombreRed;
     private Lista<Linea> lineas;
+    private Grafo grafo; //campo para el grafo
 
     public RedDeTransporte(String nombreRed) {
         this.nombreRed = nombreRed;
         this.lineas = new Lista<>();
+        this.grafo = Grafo.construirGrafo(this); // Construir el grafo al inicializar la red
     }
 
     public String getNombreRed() {
@@ -32,12 +34,18 @@ public class RedDeTransporte {
 
     public void setLineas(Lista<Linea> lineas) {
         this.lineas = lineas;
+        this.grafo = Grafo.construirGrafo(this); // Reconstruir el grafo si se cambian las líneas
     }
 
     public void agregarLinea(Linea linea) {
         lineas.agregar(linea);
+        this.grafo = Grafo.construirGrafo(this); // Reconstruir el grafo al agregar una línea
     }
-
+    
+    public Grafo getGrafo() {
+        return grafo;
+    }
+    
     @Override
     public String toString() {
         return "Red: " + nombreRed + ", Lineas:" + lineas;
