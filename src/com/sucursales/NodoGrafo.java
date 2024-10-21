@@ -6,16 +6,18 @@ package com.sucursales;
 
 /**
  *
- * @author xc2do    
+ * @author xc2do
  */
 public class NodoGrafo {
 
     private String nombre;
     private Lista<NodoGrafo> conexiones;
+    private boolean esSucursal; //esto es lo que nos dira si es una sucursal, lo cual es falso por defecto
 
     public NodoGrafo(String nombre) {
         this.nombre = nombre;
         this.conexiones = new Lista<>();
+        this.esSucursal = false;
     }
 
     public String getNombre() {
@@ -30,11 +32,20 @@ public class NodoGrafo {
         return conexiones;
     }
 
+    public void establecerSucursal(boolean esSucursal) {
+        this.esSucursal = esSucursal;
+    }
+
+    public boolean esSucursal() {
+        return esSucursal;
+    }
+
     @Override
     public String toString() {
         return "NodoGrafo{"
                 + "nombre='" + nombre + '\''
-                + ", conexiones=" + conexiones
+                + ", conexiones=" + conexiones 
+                +", esSucursal=" + esSucursal
                 + '}';
     }
 }

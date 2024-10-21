@@ -34,6 +34,7 @@ public class Menu extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         MostrarGrafo = new javax.swing.JLabel();
+        EstablecerParadas = new javax.swing.JLabel();
         CargarButton = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -50,6 +51,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         bg.add(MostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 320, 40));
+
+        EstablecerParadas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EstablecerParadasMouseClicked(evt);
+            }
+        });
+        bg.add(EstablecerParadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 320, 40));
 
         CargarButton.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         CargarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,6 +108,12 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MostrarGrafoMouseClicked
 
+    private void EstablecerParadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstablecerParadasMouseClicked
+        EstablecerCobertura establecerCobertura = new EstablecerCobertura();
+        establecerCobertura.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EstablecerParadasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -137,6 +151,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CargarButton;
+    private javax.swing.JLabel EstablecerParadas;
     private javax.swing.JLabel MostrarGrafo;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel jLabel1;

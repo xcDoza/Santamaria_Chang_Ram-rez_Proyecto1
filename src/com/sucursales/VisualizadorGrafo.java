@@ -23,6 +23,9 @@ public class VisualizadorGrafo {
             NodoGrafo nodoGrafo = nodo.getElement();
             Node graphNode = graph.addNode(nodoGrafo.getNombre());
             graphNode.setAttribute("ui.label", nodoGrafo.getNombre());
+            if (nodoGrafo.esSucursal()) {
+                graphNode.setAttribute("ui.class", "sucursal"); // Estilizar nodos sucursales
+            }
         }
 
         // Añadir aristas de Grafo a GraphStream
@@ -38,10 +41,58 @@ public class VisualizadorGrafo {
             }
         }
 
+        // Añadir estilos CSS directamente en el código Java
+        String css = "graph { fill-color: white; }"
+                + "node { fill-color: gray; text-mode: normal; }"
+                + "node.sucursal { fill-color: red; }"
+                + "node.cubierto { fill-color: green; }"
+                + "edge { fill-color: black; }";
+        graph.setAttribute("ui.stylesheet", css);
+
         System.setProperty("org.graphstream.ui", "swing");
         Viewer viewer = graph.display();
-        
+
         //con esta linea evitamos que todas las ventanas se cierren al cerrar el grafo
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+
+        //determinar y mostrar la cobertura comercial
+        determinarCoberturaComercial(graph, grafo);
+    }
+
+    private static void determinarCoberturaComercial(Graph graph, Grafo grafo) {
+        int t = AlmacenRed.getT();
+        // Realizar BFS desde cada sucursal para determinar la cobertura
+        for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
+            NodoGrafo nodoGrafo = nodo.getElement();
+            if (nodoGrafo.esSucursal()) {
+                realizarBFS(graph, nodoGrafo, t);
+            }
+        }
+    }
+
+    private static void realizarBFS(Graph graph, NodoGrafo nodoInicial, int t) {
+        Cola<NodoGrafo> cola = new Cola<>();
+        Conjunto<String> visitados = new Conjunto<>();
+        cola.encolar(nodoInicial);
+        visitados.agregar(nodoInicial.getNombre());
+
+        int nivel = 0;
+        while (!cola.estaVacia() && nivel <= t) {
+            int tamañoNivel = cola.lista.getSize(); // Usamos la lista interna de la cola
+            for (int i = 0; i < tamañoNivel; i++) {
+                NodoGrafo actual = cola.desencolar();
+                Node graphNode = graph.getNode(actual.getNombre());
+                graphNode.setAttribute("ui.class", "cubierto"); // Estilizar nodos cubiertos
+
+                for (Nodo<NodoGrafo> conexion = actual.getConexiones().getHead(); conexion != null; conexion = conexion.getNext()) {
+                    NodoGrafo vecino = conexion.getElement();
+                    if (!visitados.contiene(vecino.getNombre())) {
+                        cola.encolar(vecino);
+                        visitados.agregar(vecino.getNombre());
+                    }
+                }
+            }
+            nivel++;
+        }
     }
 }

@@ -11,6 +11,7 @@ package com.sucursales;
 public class AlmacenRed {
 
     private static RedDeTransporte redDeTransporte;
+    private static int t = 3; //rango por defecto que cubren las sucursales (red de caracas)
 
     public static void setRedDeTransporte(RedDeTransporte red) {
         redDeTransporte = red;
@@ -18,5 +19,13 @@ public class AlmacenRed {
 
     public static RedDeTransporte getRedDeTransporte() {
         return redDeTransporte;
+    }
+
+    public static void setT(int nuevoT) {
+        t = nuevoT;
+    }
+
+    public static int getT() {
+        return t;
     }
 }
