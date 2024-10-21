@@ -32,12 +32,33 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        DFS = new javax.swing.JButton();
         bg = new javax.swing.JPanel();
         MostrarGrafo = new javax.swing.JLabel();
         ColocarSucursal = new javax.swing.JLabel();
         EstablecerParadas = new javax.swing.JLabel();
         CargarButton = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+
+        jButton2.setText("jButton2");
+
+        jButton1.setText("jButton1");
+
+        jButton3.setText("jButton3");
+
+        jButton4.setText("jButton4");
+
+        DFS.setText("DFS");
+        DFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DFSActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -51,7 +72,7 @@ public class Menu extends javax.swing.JFrame {
                 MostrarGrafoMouseClicked(evt);
             }
         });
-        bg.add(MostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 320, 40));
+        bg.add(MostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 320, 40));
 
         ColocarSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -79,7 +100,10 @@ public class Menu extends javax.swing.JFrame {
         bg.add(CargarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/MenuDef.png"))); // NOI18N
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 800, 500));
+
+        jButton5.setText("jButton5");
+        bg.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,11 +147,43 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_EstablecerParadasMouseClicked
 
+<<<<<<< HEAD
     private void ColocarSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ColocarSucursalMouseClicked
         ColocarSucursal colocarSucursal = new ColocarSucursal();
         colocarSucursal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ColocarSucursalMouseClicked
+=======
+    private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
+        public String[] coberturaDFS(String sucursal) {
+        Pila pila = new Pila();
+        boolean[] visitado = new boolean[numParadas];
+        String[] resultado = new String[numParadas];
+        int coberturaCount = 0;
+
+        int indice = buscarIndice(sucursal);
+        if (indice == -1) return resultado;
+
+        pila.apilar(paradaPorIndice(indice));
+        visitado[indice] = true;
+        int nivel = 0;
+
+        while (!pila.estaVacia() && nivel <= t) {
+            String actual = pila.desapilar();
+            resultado[coberturaCount++] = actual;
+            int actualIndice = buscarIndice(actual);
+            for (int j = 0; j < numParadas; j++) {
+                if (conexiones[actualIndice][j] == 1 && !visitado[j]) {
+                    pila.apilar(paradaPorIndice(j));
+                    visitado[j] = true;
+                }
+            }
+            nivel++;
+        }
+        return resultado;
+    }
+    }//GEN-LAST:event_DFSActionPerformed
+>>>>>>> 981f5921a5be8bf69393bb3ce4bb7c2213c014cc
 
     /**
      * @param args the command line arguments
@@ -166,10 +222,19 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CargarButton;
+<<<<<<< HEAD
     private javax.swing.JLabel ColocarSucursal;
+=======
+    private javax.swing.JButton DFS;
+>>>>>>> 981f5921a5be8bf69393bb3ce4bb7c2213c014cc
     private javax.swing.JLabel EstablecerParadas;
     private javax.swing.JLabel MostrarGrafo;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

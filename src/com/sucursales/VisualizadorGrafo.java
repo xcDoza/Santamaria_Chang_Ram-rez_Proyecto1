@@ -59,15 +59,20 @@ public class VisualizadorGrafo {
         determinarCoberturaComercial(graph, grafo);
     }
 
-    private static void determinarCoberturaComercial(Graph graph, Grafo grafo) {
-        int t = AlmacenRed.getT();
-        // Realizar BFS desde cada sucursal para determinar la cobertura
-        for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
-            NodoGrafo nodoGrafo = nodo.getElement();
-            if (nodoGrafo.esSucursal()) {
-                realizarBFS(graph, nodoGrafo, t);
-            }
-        }
+    private static void determinarCoberturaComercial(Graph graph, Grafo grafo, String nombreSucursal, boolean usarDFS) {
+       NodoGrafo sucursal = grafo.obtenerNodoPorNombre(nombreSucursal);
+    if (sucursal == null) {
+        System.out.println("Sucursal no encontrada.");
+        return;
+    }
+    
+    int t = AlmacenRed.getT();
+    
+    if (usarDFS) {
+        realizarDFS(graph, sucursal, t);
+    } else {
+        realizarBFS(graph, sucursal, t);
+    } 
     }
 
     private static void realizarBFS(Graph graph, NodoGrafo nodoInicial, int t) {
@@ -95,4 +100,15 @@ public class VisualizadorGrafo {
             nivel++;
         }
     }
+    
+    private static void realizarDFS(Graph graph, NodoGrafo NodoActual, int t){
+    
+    }
+
+
+
+
 }
+
+
+
