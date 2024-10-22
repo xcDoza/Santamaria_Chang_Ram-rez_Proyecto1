@@ -17,7 +17,7 @@ public class NodoGrafo {
     public NodoGrafo(String nombre) {
         this.nombre = nombre;
         this.conexiones = new Lista<>();
-        this.esSucursal = true;
+        this.esSucursal = false;
     }
 
     public String getNombre() {

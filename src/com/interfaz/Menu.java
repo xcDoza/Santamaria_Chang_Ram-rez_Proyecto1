@@ -99,13 +99,16 @@ public class Menu extends javax.swing.JFrame {
 
     private void MostrarGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MostrarGrafoMouseClicked
         RedDeTransporte red = AlmacenRed.getRedDeTransporte();
+        String nombreSucursal = "Sucursal";
+        boolean usarDFS = false;
+
         if (red != null) {
             System.out.println("Red de transporte recuperada:");
             System.out.println(red);
 
             Grafo grafo = red.getGrafo(); // Usar el grafo directamente desde AlmacenRed
 
-            VisualizadorGrafo.visualizar(grafo);
+            VisualizadorGrafo.visualizar(grafo, nombreSucursal, usarDFS);
         } else {
             System.out.println("No se ha cargado ninguna red de transporte.");
             JOptionPane.showMessageDialog(this, "No se ha cargado ninguna red de transporte", "Error", JOptionPane.ERROR_MESSAGE);
