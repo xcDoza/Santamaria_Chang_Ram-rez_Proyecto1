@@ -56,7 +56,7 @@ public class VisualizadorGrafo {
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
 
         //determinar y mostrar la cobertura comercial
-        determinarCoberturaComercial(graph, grafo);
+        determinarCoberturaComercial(graph, grafo,);
     }
 
     private static void determinarCoberturaComercial(Graph graph, Grafo grafo, String nombreSucursal, boolean usarDFS) {
@@ -101,8 +101,8 @@ public class VisualizadorGrafo {
         }
     }
     
-    private static void realizarDFS(Graph graph, NodoGrafo NodoActual, int t){
-    
+    private static void realizarDFS(Graph graph, NodoGrafo nodoActual, int t){
+        
     }
 
 
