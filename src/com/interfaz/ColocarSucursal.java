@@ -10,6 +10,7 @@ import com.sucursales.Grafo;
 import com.sucursales.Linea;
 import com.sucursales.Nodo;
 import com.sucursales.NodoGrafo;
+import com.sucursales.Recorrido;
 import com.sucursales.RedDeTransporte;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -137,6 +138,8 @@ public class ColocarSucursal extends javax.swing.JFrame {
             nodo.establecerSucursal(true);
             actualizarTextoSucursales(grafo);
             JOptionPane.showMessageDialog(this, "Sucursal colocada en " + estacionSeleccionada, "Sucursal Colocada", JOptionPane.INFORMATION_MESSAGE);
+            Recorrido recorrer = new Recorrido();
+            recorrer.realizarDFS(nodo, 3);
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
         }

@@ -31,11 +31,8 @@ public class Main {
                 System.out.println();
             }
             
-            String nombreSucursal = "Sucursal";
-            boolean usarDFS = true;
-
-            // Visualizar el grafo usando GraphStream
-            VisualizadorGrafo.visualizar(grafo, nombreSucursal, usarDFS);
+           // Visualizar el grafo usando GraphStream
+            VisualizadorGrafo.visualizar(grafo);
         } else {
             System.out.println("Error al cargar la red de transporte.");
         }
