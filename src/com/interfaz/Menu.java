@@ -95,6 +95,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MostrarGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MostrarGrafoMouseClicked

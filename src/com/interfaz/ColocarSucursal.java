@@ -136,7 +136,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
         if (nodo != null) {
             nodo.establecerSucursal(true);
             actualizarTextoSucursales(grafo);
-            JOptionPane.showMessageDialog(this, "Sucursal colocada en " + estacionSeleccionada, "Sucursal Colocada", JOptionPane.INFORMATION_MESSAGE);
+
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
         }
