@@ -145,7 +145,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
             Recorrido recorrer = new Recorrido();
             Graph visualGraph = VisualizadorGrafo.getGraph();
             if (visualGraph != null) {
-                recorrer.realizarDFS(visualGraph, nodo, rangoCobertura); //pasamos el grafo visual y el rango como parámetros
+                recorrer.realizarBFS(visualGraph, nodo, rangoCobertura); //pasamos el grafo visual y el rango como parámetros
             } else {
                 System.out.println("El grafo visual no se ha inicializado correctamente.");
             }

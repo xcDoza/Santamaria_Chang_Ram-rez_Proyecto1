@@ -64,16 +64,21 @@ public class Recorrido {
     }
 
     //ESTO NO FUNCIONA CORRECTAMENTE
-    
     public void realizarBFS(Graph graph, NodoGrafo nodoInicial, int t) {
-        Cola<NodoGrafo> cola = new Cola<>();
+        if (nodoInicial == null || graph == null) {
+            System.out.println("Nodo inicial o grafo es nulo.");
+            return;
+        }
+
+        Cola cola = new Cola(100); // Ajusta la capacidad según sea necesario
         Conjunto<String> visitados = new Conjunto<>();
         cola.encolar(nodoInicial);
         visitados.agregar(nodoInicial.getNombre());
+        String resultado = "";
         int nivel = 0;
 
         while (!cola.estaVacia() && nivel <= t) {
-            int tamañoNivel = cola.lista.getSize(); // Tamaño de la cola al inicio de cada nivel
+            int tamañoNivel = cola.getTamaño(); // Tamaño de la cola al inicio de cada nivel
 
             for (int i = 0; i < tamañoNivel; i++) {
                 NodoGrafo actual = cola.desencolar();
@@ -81,6 +86,7 @@ public class Recorrido {
                 if (graphNode != null) {
                     graphNode.setAttribute("ui.class", "cubierto"); // Estilizar nodos cubiertos
                 }
+                resultado += actual.getNombre() + " ";
 
                 for (Nodo<NodoGrafo> conexion = actual.getConexiones().getHead(); conexion != null; conexion = conexion.getNext()) {
                     NodoGrafo vecino = conexion.getElement();
@@ -90,18 +96,20 @@ public class Recorrido {
                     }
                 }
             }
-            nivel++;
+            nivel++; // Incrementar el nivel después de procesar todos los nodos de este nivel
         }
+
+        JOptionPane.showMessageDialog(null, resultado);
     }
 
     public void determinarCoberturaComercial(Graph graph, Grafo grafo) {
         int t = AlmacenRed.getT(); //obtener el rango de cobertura desde AlmacenRed
 
-        // Realizar BFS desde cada sucursal para determinar la cobertura
+        //realizamos BFS desde cada sucursal para determinar la cobertura y esto solo afecta a la parte visual cuando mostramos el grafo
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             if (nodoGrafo.esSucursal()) {
-                realizarDFS(graph, nodoGrafo, t);
+                realizarBFS(graph, nodoGrafo, t);
             }
         }
     }
