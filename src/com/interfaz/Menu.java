@@ -114,7 +114,7 @@ public class Menu extends javax.swing.JFrame {
             System.out.println("Red de transporte recuperada:");
             System.out.println(red);
 
-            Grafo grafo = red.getGrafo(); // Usar el grafo directamente desde AlmacenRed
+            Grafo grafo = red.getGrafo(); //usamos el grafo directamente desde AlmacenRed
 
             VisualizadorGrafo.visualizar(grafo);
         } else {

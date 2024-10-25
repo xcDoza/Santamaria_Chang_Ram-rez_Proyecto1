@@ -81,11 +81,7 @@ public class BuscarArchivo extends javax.swing.JFrame {
     private void BuscarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarButtonMouseClicked
         FileChooser cargar = new FileChooser();
         RedDeTransporte red = cargar.loadRedTransporte();
-        
-        UIManager.put("OptionPane.background", Color.YELLOW);  // Fondo del JOptionPane
-        UIManager.put("Panel.background", Color.YELLOW);  // Cambia el color de fondo del joptionpane// Esta vaina no funciona
-        UIManager.put("OptionPane.messageForeground", Color.BLACK);  // Ya funciona pero se ve feo hayque arreglarlo
-        // Aquí puedes trabajar con la red de transporte cargada
+
         if (red != null) {
             AlmacenRed.setRedDeTransporte(red); //Esto es para guardar la red cargada y usarla en las otras ventanas y posibles modificaciones :)
             JOptionPane.showMessageDialog(this, "La red de transporte ha sido cargada con éxito", "Carga Completa", JOptionPane.INFORMATION_MESSAGE);

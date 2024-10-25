@@ -13,8 +13,8 @@ import org.graphstream.graph.Node;
  * @author yilup
  */
 public class Recorrido {
-    
-   public void realizarDFS(NodoGrafo nodoActual, int t) {
+
+    public void realizarDFS(Graph graph, NodoGrafo nodoActual, int t) {
         if (nodoActual == null) {
             System.out.println("El nodo actual es nulo.");
             return;
@@ -24,7 +24,7 @@ public class Recorrido {
         Pilas pila = new Pilas(100); // Ajusta la capacidad según sea necesario
         pila.push(nodoActual);
         visitados.agregar(nodoActual.getNombre());
-        
+
         String resultado = "";
 
         int nivel = 0; // Nivel de profundidad actual
@@ -42,8 +42,12 @@ public class Recorrido {
             for (int i = 0; i < tamañoNivel; i++) {
                 NodoGrafo actual = nodosNivel[i];
                 resultado += actual.getNombre() + "\n";
-//                Node graphNode = graph.getNode(actual.getNombre());
-//                graphNode.setAttribute("ui.class", "cubierto"); // Estilizar nodos cubiertos
+
+                // Estilizar nodo cubierto en el grafo visual
+                Node graphNode = graph.getNode(actual.getNombre());
+                if (graphNode != null) {
+                    graphNode.setAttribute("ui.class", "cubierto");
+                }
 
                 // Recorrer las conexiones del nodo actual
                 for (Nodo<NodoGrafo> conexion = actual.getConexiones().getHead(); conexion != null; conexion = conexion.getNext()) {
@@ -56,16 +60,12 @@ public class Recorrido {
             }
             nivel++; // Incrementar el nivel de profundidad
         }
-        
+
         JOptionPane.showMessageDialog(null, resultado);
-        
-        
+
     }
-   
-   
-   
-   
-   private static void realizarBFS(Graph graph, NodoGrafo nodoInicial, int t) {
+
+    private static void realizarBFS(Graph graph, NodoGrafo nodoInicial, int t) {
         Cola<NodoGrafo> cola = new Cola<>();
         Conjunto<String> visitados = new Conjunto<>();
         cola.encolar(nodoInicial);
@@ -90,5 +90,17 @@ public class Recorrido {
             nivel++;
         }
     }
-    
+
+    public void determinarCoberturaComercial(Graph graph, Grafo grafo) {
+        int t = AlmacenRed.getT(); // Obtener el rango de cobertura desde AlmacenRed
+
+        // Realizar BFS desde cada sucursal para determinar la cobertura
+        for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
+            NodoGrafo nodoGrafo = nodo.getElement();
+            if (nodoGrafo.esSucursal()) {
+                realizarBFS(graph, nodoGrafo, t);
+            }
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ import com.sucursales.Nodo;
 import com.sucursales.NodoGrafo;
 import com.sucursales.Recorrido;
 import com.sucursales.RedDeTransporte;
+import com.sucursales.VisualizadorGrafo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -131,18 +132,17 @@ public class ColocarSucursal extends javax.swing.JFrame {
 
     private void ColocarSucursal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColocarSucursal1ActionPerformed
         String estacionSeleccionada = (String) Estaciones.getSelectedItem();
-        Grafo grafo = AlmacenRed.getRedDeTransporte().getGrafo(); // Obtiene el grafo directamente desde AlmacenRed
+        Grafo grafo = AlmacenRed.getRedDeTransporte().getGrafo(); //con esto obtenemos el grafo directamente desde AlmacenRed
         NodoGrafo nodo = grafo.obtenerNodoPorNombre(estacionSeleccionada);
 
         if (nodo != null) {
             nodo.establecerSucursal(true);
             actualizarTextoSucursales(grafo);
-
-
             JOptionPane.showMessageDialog(this, "Sucursal colocada en " + estacionSeleccionada, "Sucursal Colocada", JOptionPane.INFORMATION_MESSAGE);
-            Recorrido recorrer = new Recorrido();
-            recorrer.realizarDFS(nodo, 3);
 
+            int rangoCobertura = AlmacenRed.getT();//aqui se obteniene el rango de cobertura desde AlmacenRed
+            Recorrido recorrer = new Recorrido();
+            recorrer.realizarDFS(VisualizadorGrafo.getGraph(), nodo, rangoCobertura); //pasar el grafo visual y el rango como parámetros
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
         }
