@@ -15,6 +15,7 @@ import com.sucursales.RedDeTransporte;
 import com.sucursales.VisualizadorGrafo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.graphstream.graph.Graph;
 
 /**
  *
@@ -142,7 +143,12 @@ public class ColocarSucursal extends javax.swing.JFrame {
 
             int rangoCobertura = AlmacenRed.getT();//aqui se obteniene el rango de cobertura desde AlmacenRed
             Recorrido recorrer = new Recorrido();
-            recorrer.realizarDFS(VisualizadorGrafo.getGraph(), nodo, rangoCobertura); //pasar el grafo visual y el rango como parámetros
+            Graph visualGraph = VisualizadorGrafo.getGraph();
+            if (visualGraph != null) {
+                recorrer.realizarDFS(visualGraph, nodo, rangoCobertura); //pasamos el grafo visual y el rango como parámetros
+            } else {
+                System.out.println("El grafo visual no se ha inicializado correctamente.");
+            }
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
         }

@@ -57,12 +57,13 @@ public class VisualizadorGrafo {
         //con esta linea evitamos que todas las ventanas se cierren al cerrar el grafo
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
 
-        //con esto determinamos y mostramos la cobertura comercial usando la clase Recorrido
+        //con esto determinamos y la cobertura comercial usando la clase Recorrido
         Recorrido recorrido = new Recorrido();
         recorrido.determinarCoberturaComercial(graph, grafo);
     }
 
     public static Graph getGraph() {
         return graph;
+
     }
 }
