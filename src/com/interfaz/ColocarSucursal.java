@@ -141,7 +141,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Sucursal colocada en " + estacionSeleccionada, "Sucursal Colocada", JOptionPane.INFORMATION_MESSAGE);
             Recorrido recorrer = new Recorrido();
-            recorrer.realizarDFS(nodo, 3);
+            recorrer.realizarBFS(Graph,nodo, 3);
 
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
