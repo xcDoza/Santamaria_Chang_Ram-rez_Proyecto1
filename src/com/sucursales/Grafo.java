@@ -82,4 +82,15 @@ public class Grafo {
 
         return grafo;
     }
+
+    public void agregarConexion(String estacion1, String estacion2) {
+        NodoGrafo nodo1 = obtenerNodoPorNombre(estacion1);
+        NodoGrafo nodo2 = obtenerNodoPorNombre(estacion2);
+
+        if (nodo1 != null && nodo2 != null) {
+            agregarArista(nodo1, nodo2);
+        } else {
+            System.out.println("Una o ambas estaciones no fueron encontradas.");
+        }
+    }
 }

@@ -41,11 +41,42 @@ public class RedDeTransporte {
         lineas.agregar(linea);
         this.grafo = Grafo.construirGrafo(this); // Reconstruir el grafo al agregar una línea
     }
-    
+
     public Grafo getGrafo() {
         return grafo;
     }
-    
+
+    public void agregarLineaNueva(String nombreLinea, Lista<String> estaciones) {
+        Linea nuevaLinea = new Linea(nombreLinea);
+        NodoGrafo nodoAnteriorGrafo = null;
+
+        for (Nodo<String> nodoEstacion = estaciones.getHead(); nodoEstacion != null; nodoEstacion = nodoEstacion.getNext()) {
+            String nombreEstacion = nodoEstacion.getElement();
+
+            //si la estacion ya existe en la red, usala, de lo contrario, creala y agregala
+            NodoGrafo nodoActual = grafo.obtenerNodoPorNombre(nombreEstacion);
+            Estacion estacion;
+            if (nodoActual == null) {
+                estacion = new Estacion(nombreEstacion);
+                nuevaLinea.agregarEstacion(estacion);
+                nodoActual = new NodoGrafo(nombreEstacion);
+                grafo.agregarNodo(nodoActual);
+            } else {
+                estacion = new Estacion(nombreEstacion);
+                nuevaLinea.agregarEstacion(estacion);
+            }
+
+            //con esto conectamos estaciones entre sí
+            if (nodoAnteriorGrafo != null) {
+                grafo.agregarConexion(nodoAnteriorGrafo.getNombre(), nombreEstacion);
+            }
+            nodoAnteriorGrafo = nodoActual;
+        }
+
+        //añadir la nueva línea a la red
+        this.agregarLinea(nuevaLinea);
+    }
+
     @Override
     public String toString() {
         return "Red: " + nombreRed + ", Lineas:" + lineas;

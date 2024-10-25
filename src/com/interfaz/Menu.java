@@ -33,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        AgregarLinea = new javax.swing.JLabel();
         CargarButton = new javax.swing.JLabel();
         ColocarSucursal = new javax.swing.JLabel();
         EstablecerParadas = new javax.swing.JLabel();
@@ -43,6 +44,14 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        AgregarLinea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AgregarLinea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AgregarLineaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(AgregarLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 320, 60));
 
         CargarButton.setFont(new java.awt.Font("Roboto Medium", 0, 36)); // NOI18N
         CargarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,8 +109,6 @@ public class Menu extends javax.swing.JFrame {
 
     private void MostrarGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MostrarGrafoMouseClicked
         RedDeTransporte red = AlmacenRed.getRedDeTransporte();
-        String nombreSucursal = "Sucursal";
-        boolean usarDFS = false;
 
         if (red != null) {
             System.out.println("Red de transporte recuperada:");
@@ -109,7 +116,7 @@ public class Menu extends javax.swing.JFrame {
 
             Grafo grafo = red.getGrafo(); // Usar el grafo directamente desde AlmacenRed
 
-            VisualizadorGrafo.visualizar(grafo, nombreSucursal, usarDFS);
+            VisualizadorGrafo.visualizar(grafo);
         } else {
             System.out.println("No se ha cargado ninguna red de transporte.");
             JOptionPane.showMessageDialog(this, "No se ha cargado ninguna red de transporte", "Error", JOptionPane.ERROR_MESSAGE);
@@ -133,6 +140,12 @@ public class Menu extends javax.swing.JFrame {
         cargarArchivo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CargarButtonMouseClicked
+
+    private void AgregarLineaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarLineaMouseClicked
+        AgregarLinea agregarLinea = new AgregarLinea();
+        agregarLinea.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AgregarLineaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,6 +183,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AgregarLinea;
     private javax.swing.JLabel CargarButton;
     private javax.swing.JLabel ColocarSucursal;
     private javax.swing.JLabel EstablecerParadas;
