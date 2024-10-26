@@ -25,8 +25,14 @@ public class VisualizadorGrafo {
             NodoGrafo nodoGrafo = nodo.getElement();
             Node graphNode = graph.addNode(nodoGrafo.getNombre());
             graphNode.setAttribute("ui.label", nodoGrafo.getNombre());
+
+            //tinta os nodos de rojo si son sucursales
             if (nodoGrafo.esSucursal()) {
-                graphNode.setAttribute("ui.class", "sucursal"); // Estilizar nodos sucursales
+                graphNode.setAttribute("ui.class", "sucursal");
+            
+            } //tinta los nodos de verde si estan en el rango de cobertura
+            else if (nodoGrafo.estaCubierto()) {
+                graphNode.setAttribute("ui.class", "cubierto");
             }
         }
 
@@ -56,14 +62,9 @@ public class VisualizadorGrafo {
 
         //con esta linea evitamos que todas las ventanas se cierren al cerrar el grafo
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-
-        //con esto determinamos y la cobertura comercial usando la clase Recorrido
-        Recorrido recorrido = new Recorrido();
-        recorrido.determinarCoberturaComercial(graph, grafo);
     }
 
     public static Graph getGraph() {
         return graph;
-
     }
 }

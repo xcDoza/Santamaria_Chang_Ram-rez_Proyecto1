@@ -13,11 +13,13 @@ public class NodoGrafo {
     private String nombre;
     private Lista<NodoGrafo> conexiones;
     private boolean esSucursal; //esto es lo que nos dira si es una sucursal, lo cual es falso por defecto
+    private boolean cubierto; //esto nos dide si la parada esta en el rango de cobertura de una sucursal
 
     public NodoGrafo(String nombre) {
         this.nombre = nombre;
         this.conexiones = new Lista<>();
         this.esSucursal = false;
+        this.cubierto = false;
     }
 
     public String getNombre() {
@@ -40,12 +42,20 @@ public class NodoGrafo {
         return esSucursal;
     }
 
+    public boolean estaCubierto() {
+        return cubierto;
+    }
+
+    public void establecerCubierto(boolean cubierto) {
+        this.cubierto = cubierto;
+    }
+
     @Override
     public String toString() {
         return "NodoGrafo{"
                 + "nombre='" + nombre + '\''
-                + ", conexiones=" + conexiones 
-                +", esSucursal=" + esSucursal
+                + ", conexiones=" + conexiones
+                + ", esSucursal=" + esSucursal
                 + '}';
     }
 }
