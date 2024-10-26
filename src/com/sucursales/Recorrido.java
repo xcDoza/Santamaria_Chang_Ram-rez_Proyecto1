@@ -4,10 +4,6 @@
  */
 package com.sucursales;
 
-/**
- *
- * @author yilup
- */
 public class Recorrido {
 
     public void realizarDFS(NodoGrafo nodoActual, int t) {
@@ -90,5 +86,26 @@ public class Recorrido {
                 realizarDFS(nodoGrafo, t);
             }
         }
+    }
+
+    public boolean revisarCoberturaTotal(Grafo grafo) {
+        for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
+            NodoGrafo nodoGrafo = nodo.getElement();
+            if (!nodoGrafo.estaCubierto() && !nodoGrafo.esSucursal()) {
+                return false; // Si hay alguna parada no cubierta, la cobertura no es total
+            }
+        }
+        return true; // Todas las paradas están cubiertas
+    }
+
+    public Lista<String> sugerirNuevasSucursales(Grafo grafo) {
+        Lista<String> sugerencias = new Lista<>();
+        for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
+            NodoGrafo nodoGrafo = nodo.getElement();
+            if (!nodoGrafo.estaCubierto() && !nodoGrafo.esSucursal()) {
+                sugerencias.agregar(nodoGrafo.getNombre());
+            }
+        }
+        return sugerencias;
     }
 }

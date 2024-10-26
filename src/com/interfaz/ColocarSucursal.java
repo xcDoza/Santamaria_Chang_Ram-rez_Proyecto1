@@ -8,12 +8,14 @@ import com.sucursales.AlmacenRed;
 import com.sucursales.Estacion;
 import com.sucursales.Grafo;
 import com.sucursales.Linea;
+import com.sucursales.Lista;
 import com.sucursales.Nodo;
 import com.sucursales.NodoGrafo;
 import com.sucursales.Recorrido;
 import com.sucursales.RedDeTransporte;
 import com.sucursales.VisualizadorGrafo;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.graphstream.graph.Graph;
 
@@ -43,10 +45,13 @@ public class ColocarSucursal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        QuitarSucursalSugerida = new javax.swing.JButton();
         QuitarSucursal = new javax.swing.JButton();
+        ColocarSucursalSugerida = new javax.swing.JButton();
         ColocarSucursal1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Sucursales = new javax.swing.JTextArea();
+        EstacionesSugeridas = new javax.swing.JComboBox<>();
         Estaciones = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -74,8 +79,19 @@ public class ColocarSucursal extends javax.swing.JFrame {
         jLabel2.setText("Sucursales");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 240, -1));
 
+        QuitarSucursalSugerida.setBackground(new java.awt.Color(255, 51, 51));
+        QuitarSucursalSugerida.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
+        QuitarSucursalSugerida.setForeground(new java.awt.Color(51, 51, 51));
+        QuitarSucursalSugerida.setText("Quitar Sucursal Sugerida");
+        QuitarSucursalSugerida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuitarSucursalSugeridaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(QuitarSucursalSugerida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 130, 50));
+
         QuitarSucursal.setBackground(new java.awt.Color(255, 51, 51));
-        QuitarSucursal.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        QuitarSucursal.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
         QuitarSucursal.setForeground(new java.awt.Color(51, 51, 51));
         QuitarSucursal.setText("Quitar Sucursal");
         QuitarSucursal.addActionListener(new java.awt.event.ActionListener() {
@@ -83,10 +99,21 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 QuitarSucursalActionPerformed(evt);
             }
         });
-        jPanel1.add(QuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 200, 50));
+        jPanel1.add(QuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 130, 50));
+
+        ColocarSucursalSugerida.setBackground(new java.awt.Color(0, 153, 51));
+        ColocarSucursalSugerida.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
+        ColocarSucursalSugerida.setForeground(new java.awt.Color(51, 51, 51));
+        ColocarSucursalSugerida.setText("Colocar Sucursal Sugerida");
+        ColocarSucursalSugerida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ColocarSucursalSugeridaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ColocarSucursalSugerida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 130, 50));
 
         ColocarSucursal1.setBackground(new java.awt.Color(0, 153, 51));
-        ColocarSucursal1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        ColocarSucursal1.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
         ColocarSucursal1.setForeground(new java.awt.Color(51, 51, 51));
         ColocarSucursal1.setText("Colocar Sucursal");
         ColocarSucursal1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +121,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 ColocarSucursal1ActionPerformed(evt);
             }
         });
-        jPanel1.add(ColocarSucursal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 200, 50));
+        jPanel1.add(ColocarSucursal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 50));
 
         Sucursales.setEditable(false);
         Sucursales.setBackground(new java.awt.Color(255, 255, 153));
@@ -104,6 +131,15 @@ public class ColocarSucursal extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 240, 170));
 
+        EstacionesSugeridas.setBackground(new java.awt.Color(255, 255, 153));
+        EstacionesSugeridas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sugerencias*" }));
+        EstacionesSugeridas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EstacionesSugeridasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EstacionesSugeridas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 130, 30));
+
         Estaciones.setBackground(new java.awt.Color(255, 255, 153));
         Estaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         Estaciones.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +147,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 EstacionesActionPerformed(evt);
             }
         });
-        jPanel1.add(Estaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 200, 30));
+        jPanel1.add(Estaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/ColocarSucursal.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
@@ -144,6 +180,13 @@ public class ColocarSucursal extends javax.swing.JFrame {
             //se actualiza la cobertura 
             Recorrido recorrido = new Recorrido();
             recorrido.determinarCoberturaComercial(grafo); //determinar cobertura en el grafo de datos
+            //revisar la cobertura total
+            if (recorrido.revisarCoberturaTotal(grafo)) {
+                JOptionPane.showMessageDialog(this, "¡Cobertura total alcanzada!", "Cobertura Total", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                //actualizar el JComboBox con sugerencias
+                actualizarSugerencias(EstacionesSugeridas, grafo);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -172,6 +215,57 @@ public class ColocarSucursal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void EstacionesSugeridasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstacionesSugeridasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EstacionesSugeridasActionPerformed
+
+    private void ColocarSucursalSugeridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColocarSucursalSugeridaActionPerformed
+        String estacionSugerida = (String) EstacionesSugeridas.getSelectedItem();
+        Grafo grafo = AlmacenRed.getRedDeTransporte().getGrafo(); // Obtiene el grafo de datos
+        NodoGrafo nodo = grafo.obtenerNodoPorNombre(estacionSugerida);
+
+        if (nodo != null) {
+            nodo.establecerSucursal(true); // Marcar como sucursal
+            actualizarTextoSucursales(grafo);
+            JOptionPane.showMessageDialog(this, "Sucursal sugerida colocada en " + estacionSugerida, "Sucursal Colocada", JOptionPane.INFORMATION_MESSAGE);
+
+            Recorrido recorrido = new Recorrido();
+            recorrido.determinarCoberturaComercial(grafo);
+
+            //revisar la cobertura total
+            if (recorrido.revisarCoberturaTotal(grafo)) {
+                JOptionPane.showMessageDialog(this, "¡Cobertura total alcanzada!", "Cobertura Total", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                //actualizar el combobox con sugerencias
+                actualizarSugerencias(EstacionesSugeridas, grafo);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSugerida, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ColocarSucursalSugeridaActionPerformed
+
+    private void QuitarSucursalSugeridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitarSucursalSugeridaActionPerformed
+        String estacionSugerida = (String) EstacionesSugeridas.getSelectedItem();
+        Grafo grafo = AlmacenRed.getRedDeTransporte().getGrafo(); // Obtiene el grafo de datos
+        NodoGrafo nodo = grafo.obtenerNodoPorNombre(estacionSugerida);
+
+        if (nodo != null) {
+            nodo.establecerSucursal(false); // Marcar como no sucursal
+            nodo.establecerCubierto(false); // Marcar como no cubierto para recalcular cobertura
+            actualizarTextoSucursales(grafo);
+            JOptionPane.showMessageDialog(this, "Sucursal sugerida eliminada de " + estacionSugerida, "Sucursal Eliminada", JOptionPane.INFORMATION_MESSAGE);
+
+            // Realizar el recorrido para actualizar la cobertura
+            Recorrido recorrido = new Recorrido();
+            recorrido.determinarCoberturaComercial(grafo);
+
+            // Actualizar el JComboBox con sugerencias
+            actualizarSugerencias(EstacionesSugeridas, grafo);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSugerida, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_QuitarSucursalSugeridaActionPerformed
+
     private void cargarEstaciones() {
         RedDeTransporte red = AlmacenRed.getRedDeTransporte(); // Accedemos directamente a la red de transporte
 
@@ -196,6 +290,18 @@ public class ColocarSucursal extends javax.swing.JFrame {
             }
         }
         Sucursales.setText(sucursalesTexto.toString());
+    }
+
+    private void actualizarSugerencias(JComboBox<String> comboBoxSugerencias, Grafo grafo) {
+        Recorrido recorrido = new Recorrido();
+        Lista<String> sugerencias = recorrido.sugerirNuevasSucursales(grafo);
+
+        //limpiar el JComboBox y agregar nuevas sugerencias
+        comboBoxSugerencias.removeAllItems();
+        for (Nodo<String> nodo = sugerencias.getHead(); nodo != null; nodo = nodo.getNext()) {
+            String estacionSugerida = nodo.getElement();
+            comboBoxSugerencias.addItem(estacionSugerida);
+        }
     }
 
     /**
@@ -235,8 +341,11 @@ public class ColocarSucursal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ColocarSucursal1;
+    private javax.swing.JButton ColocarSucursalSugerida;
     private javax.swing.JComboBox<String> Estaciones;
+    private javax.swing.JComboBox<String> EstacionesSugeridas;
     private javax.swing.JButton QuitarSucursal;
+    private javax.swing.JButton QuitarSucursalSugerida;
     private javax.swing.JTextArea Sucursales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
