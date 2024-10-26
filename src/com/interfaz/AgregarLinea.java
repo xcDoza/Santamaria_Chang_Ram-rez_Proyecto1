@@ -34,66 +34,80 @@ public class AgregarLinea extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         nombreLineaTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         estacionesTextArea = new javax.swing.JTextArea();
-        MenuButton = new javax.swing.JToggleButton();
         AgregarLinea = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 400));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Importante!");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 240, -1));
+
+        jLabel2.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        jLabel2.setText("Nombre de la Linea:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 120, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Menu");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 110, 40));
 
         nombreLineaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreLineaTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(nombreLineaTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, 30));
+        jPanel1.add(nombreLineaTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 140, 30));
 
         estacionesTextArea.setColumns(20);
         estacionesTextArea.setRows(5);
         jScrollPane1.setViewportView(estacionesTextArea);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 250, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 260, 170));
 
-        MenuButton.setText("Menu");
-        MenuButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(MenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 120, 30));
-
-        AgregarLinea.setText("agregar");
+        AgregarLinea.setBackground(new java.awt.Color(255, 255, 102));
+        AgregarLinea.setText("Agregar Linea");
         AgregarLinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarLineaActionPerformed(evt);
             }
         });
-        jPanel1.add(AgregarLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 120, 70));
+        jPanel1.add(AgregarLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 140, 50));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/AgregarLineaDef.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void MenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuButtonActionPerformed
-        Menu menu = new Menu();
-        menu.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_MenuButtonActionPerformed
 
     private void nombreLineaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreLineaTextFieldActionPerformed
         // TODO add your handling code here:
@@ -110,10 +124,16 @@ public class AgregarLinea extends javax.swing.JFrame {
         red.agregarLineaNueva(nombreLinea, estaciones); // Agregar la nueva línea a la red
         JOptionPane.showMessageDialog(this, "Nueva línea " + nombreLinea + " agregada.", "Línea Agregada", JOptionPane.INFORMATION_MESSAGE);
 
-        // Actualizar el grafo
+        //actualizar el grafo
         Grafo grafo = red.getGrafo();
         VisualizadorGrafo.visualizar(grafo);
     }//GEN-LAST:event_AgregarLineaActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -152,8 +172,11 @@ public class AgregarLinea extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarLinea;
-    private javax.swing.JToggleButton MenuButton;
     private javax.swing.JTextArea estacionesTextArea;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombreLineaTextField;

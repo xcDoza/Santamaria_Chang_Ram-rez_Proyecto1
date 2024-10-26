@@ -12,6 +12,7 @@ public class AlmacenRed {
 
     private static RedDeTransporte redDeTransporte;
     private static int t = 3; //rango por defecto que cubren las sucursales (red de caracas)
+    private static String tipoRecorrido = "BFS";
 
     public static void setRedDeTransporte(RedDeTransporte red) {
         redDeTransporte = red;
@@ -27,5 +28,13 @@ public class AlmacenRed {
 
     public static int getT() {
         return t;
+    }
+
+    public static String getTipoRecorrido() {
+        return tipoRecorrido;
+    }
+
+    public static void setTipoRecorrido(String nuevoTipoRecorrido) {
+        tipoRecorrido = nuevoTipoRecorrido;
     }
 }

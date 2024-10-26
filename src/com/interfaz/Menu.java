@@ -130,9 +130,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_EstablecerParadasMouseClicked
 
     private void ColocarSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ColocarSucursalMouseClicked
-        ColocarSucursal colocarSucursal = new ColocarSucursal();
-        colocarSucursal.setVisible(true);
-        this.dispose();
+        RedDeTransporte red = AlmacenRed.getRedDeTransporte();
+        if (red != null) {
+            System.out.println("Red de transporte recuperada:");
+            ColocarSucursal colocarSucursal = new ColocarSucursal();
+            colocarSucursal.setVisible(true);
+            this.dispose();
+        } else {
+            System.out.println("No se ha cargado ninguna red de transporte.");
+            JOptionPane.showMessageDialog(this, "No se ha cargado ninguna red de transporte", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ColocarSucursalMouseClicked
 
     private void CargarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CargarButtonMouseClicked

@@ -32,7 +32,7 @@ public class EstablecerCobertura extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         T = new javax.swing.JTextField();
         CambiarT = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        rangoactual = new javax.swing.JLabel();
         Retroceder = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -51,10 +51,10 @@ public class EstablecerCobertura extends javax.swing.JFrame {
         });
         jPanel1.add(CambiarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 90, 30));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Rango actual: 3");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 90, -1));
+        rangoactual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rangoactual.setText("Rango actual: 3");
+        rangoactual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(rangoactual, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 90, -1));
 
         Retroceder.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         Retroceder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -95,7 +95,7 @@ public class EstablecerCobertura extends javax.swing.JFrame {
         try {
             int nuevoValorT = Integer.parseInt(T.getText());
             AlmacenRed.setT(nuevoValorT);
-            JOptionPane.showMessageDialog(this, "El valor de t ha sido actualizado a " + nuevoValorT, "Valor Actualizado", JOptionPane.INFORMATION_MESSAGE);
+            rangoactual.setText("Rango actual: " + nuevoValorT);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -141,7 +141,7 @@ public class EstablecerCobertura extends javax.swing.JFrame {
     private javax.swing.JLabel Retroceder;
     private javax.swing.JTextField T;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel rangoactual;
     // End of variables declaration//GEN-END:variables
 }

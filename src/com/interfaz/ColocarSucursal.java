@@ -45,6 +45,12 @@ public class ColocarSucursal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        recorridoactual = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        DFS = new javax.swing.JButton();
+        BFS = new javax.swing.JButton();
         QuitarSucursalSugerida = new javax.swing.JButton();
         QuitarSucursal = new javax.swing.JButton();
         ColocarSucursalSugerida = new javax.swing.JButton();
@@ -71,13 +77,49 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 110, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 120, 40));
 
         jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Sucursales");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 240, -1));
+        jLabel2.setText("S\nU\nC\nU\nR\nS\nA\nL\nE\nS");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 250, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        jLabel4.setText("Recorrido Actual:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 410, 150, -1));
+
+        recorridoactual.setFont(new java.awt.Font("Roboto Black", 0, 12)); // NOI18N
+        recorridoactual.setText("BFS");
+        jPanel1.add(recorridoactual, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel5.setText("Estaciones:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel6.setText("Estaciones Sugeridas:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+
+        DFS.setBackground(new java.awt.Color(255, 204, 102));
+        DFS.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        DFS.setText("DFS");
+        DFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DFSActionPerformed(evt);
+            }
+        });
+        jPanel1.add(DFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, 150, 60));
+
+        BFS.setBackground(new java.awt.Color(255, 204, 102));
+        BFS.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        BFS.setText("BFS");
+        BFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BFSActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 150, 60));
 
         QuitarSucursalSugerida.setBackground(new java.awt.Color(255, 51, 51));
         QuitarSucursalSugerida.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
@@ -88,7 +130,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 QuitarSucursalSugeridaActionPerformed(evt);
             }
         });
-        jPanel1.add(QuitarSucursalSugerida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 130, 50));
+        jPanel1.add(QuitarSucursalSugerida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 160, 50));
 
         QuitarSucursal.setBackground(new java.awt.Color(255, 51, 51));
         QuitarSucursal.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
@@ -99,7 +141,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 QuitarSucursalActionPerformed(evt);
             }
         });
-        jPanel1.add(QuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 130, 50));
+        jPanel1.add(QuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 150, 50));
 
         ColocarSucursalSugerida.setBackground(new java.awt.Color(0, 153, 51));
         ColocarSucursalSugerida.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
@@ -110,7 +152,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 ColocarSucursalSugeridaActionPerformed(evt);
             }
         });
-        jPanel1.add(ColocarSucursalSugerida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 130, 50));
+        jPanel1.add(ColocarSucursalSugerida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 160, 50));
 
         ColocarSucursal1.setBackground(new java.awt.Color(0, 153, 51));
         ColocarSucursal1.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
@@ -121,7 +163,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 ColocarSucursal1ActionPerformed(evt);
             }
         });
-        jPanel1.add(ColocarSucursal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 50));
+        jPanel1.add(ColocarSucursal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 50));
 
         Sucursales.setEditable(false);
         Sucursales.setBackground(new java.awt.Color(255, 255, 153));
@@ -129,7 +171,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
         Sucursales.setRows(5);
         jScrollPane1.setViewportView(Sucursales);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 240, 170));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 310, 170));
 
         EstacionesSugeridas.setBackground(new java.awt.Color(255, 255, 153));
         EstacionesSugeridas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sugerencias*" }));
@@ -138,7 +180,7 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 EstacionesSugeridasActionPerformed(evt);
             }
         });
-        jPanel1.add(EstacionesSugeridas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 130, 30));
+        jPanel1.add(EstacionesSugeridas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 160, 30));
 
         Estaciones.setBackground(new java.awt.Color(255, 255, 153));
         Estaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -147,10 +189,10 @@ public class ColocarSucursal extends javax.swing.JFrame {
                 EstacionesActionPerformed(evt);
             }
         });
-        jPanel1.add(Estaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 30));
+        jPanel1.add(Estaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 150, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/ColocarSucursal.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/ColocarSucursalDef.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,6 +308,16 @@ public class ColocarSucursal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_QuitarSucursalSugeridaActionPerformed
 
+    private void BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSActionPerformed
+        AlmacenRed.setTipoRecorrido("BFS");
+        recorridoactual.setText("BFS");
+    }//GEN-LAST:event_BFSActionPerformed
+
+    private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
+        AlmacenRed.setTipoRecorrido("DFS");
+        recorridoactual.setText("DFS");
+    }//GEN-LAST:event_DFSActionPerformed
+
     private void cargarEstaciones() {
         RedDeTransporte red = AlmacenRed.getRedDeTransporte(); // Accedemos directamente a la red de transporte
 
@@ -340,8 +392,10 @@ public class ColocarSucursal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BFS;
     private javax.swing.JButton ColocarSucursal1;
     private javax.swing.JButton ColocarSucursalSugerida;
+    private javax.swing.JButton DFS;
     private javax.swing.JComboBox<String> Estaciones;
     private javax.swing.JComboBox<String> EstacionesSugeridas;
     private javax.swing.JButton QuitarSucursal;
@@ -350,7 +404,11 @@ public class ColocarSucursal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel recorridoactual;
     // End of variables declaration//GEN-END:variables
 }

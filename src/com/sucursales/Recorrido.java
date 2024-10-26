@@ -11,7 +11,8 @@ public class Recorrido {
             System.out.println("El nodo actual es nulo.");
             return;
         }
-
+        
+        System.out.println("recorrido dfs hecho");
         Conjunto<String> visitados = new Conjunto<>();
         Pilas pila = new Pilas(100);
         pila.push(nodoActual);
@@ -50,7 +51,8 @@ public class Recorrido {
             System.out.println("Nodo inicial o grafo es nulo.");
             return;
         }
-
+        
+        System.out.println("recorrido bfs hecho");
         Cola cola = new Cola(100); //ajusta la capacidad según sea necesario
         Conjunto<String> visitados = new Conjunto<>();
         cola.encolar(nodoInicial);
@@ -79,11 +81,16 @@ public class Recorrido {
 
     public void determinarCoberturaComercial(Grafo grafo) {
         int t = AlmacenRed.getT(); //obtener el rango de cobertura desde AlmacenRed
+        String tipoRecorrido = AlmacenRed.getTipoRecorrido();//con esto se obtiene el tipo de recorrido
 
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             if (nodoGrafo.esSucursal()) {
-                realizarDFS(nodoGrafo, t);
+                if ("BFS".equals(tipoRecorrido)) {
+                    realizarBFS(nodoGrafo, t);//realizar BFS
+                } else if ("DFS".equals(tipoRecorrido)) {
+                    realizarDFS(nodoGrafo, t);//realizar DFS
+                }
             }
         }
     }
