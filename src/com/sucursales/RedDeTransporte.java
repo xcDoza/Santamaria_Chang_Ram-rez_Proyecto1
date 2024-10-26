@@ -56,6 +56,7 @@ public class RedDeTransporte {
             //si la estacion ya existe en la red, usala, de lo contrario, creala y agregala
             NodoGrafo nodoActual = grafo.obtenerNodoPorNombre(nombreEstacion);
             Estacion estacion;
+            
             if (nodoActual == null) {
                 estacion = new Estacion(nombreEstacion);
                 nuevaLinea.agregarEstacion(estacion);
@@ -73,8 +74,8 @@ public class RedDeTransporte {
             nodoAnteriorGrafo = nodoActual;
         }
 
-        //añadir la nueva línea a la red
-        this.agregarLinea(nuevaLinea);
+        //añadir la nueva línea a la red sin reconstruir el grafo
+        lineas.agregar(nuevaLinea);
     }
 
     @Override

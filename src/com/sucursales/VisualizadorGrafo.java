@@ -20,7 +20,7 @@ public class VisualizadorGrafo {
     public static void visualizar(Grafo grafo) {
         graph = new SingleGraph("Grafo de Transporte");
 
-        // Añadir nodos de Grafo a GraphStream
+        //añadir nodos de Grafo a GraphStream
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             Node graphNode = graph.addNode(nodoGrafo.getNombre());
@@ -29,14 +29,14 @@ public class VisualizadorGrafo {
             //tinta os nodos de rojo si son sucursales
             if (nodoGrafo.esSucursal()) {
                 graphNode.setAttribute("ui.class", "sucursal");
-            
+
             } //tinta los nodos de verde si estan en el rango de cobertura
             else if (nodoGrafo.estaCubierto()) {
                 graphNode.setAttribute("ui.class", "cubierto");
             }
         }
 
-        // Añadir aristas de Grafo a GraphStream
+        //añadir aristas de Grafo a GraphStream
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             Lista<NodoGrafo> conexiones = nodoGrafo.getConexiones();
