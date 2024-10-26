@@ -8,6 +8,7 @@ import com.sucursales.AlmacenRed;
 import com.sucursales.Grafo;
 import com.sucursales.RedDeTransporte;
 import com.sucursales.VisualizadorGrafo;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,8 +34,9 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        AgregarLinea = new javax.swing.JLabel();
         CargarButton = new javax.swing.JLabel();
+        Salir = new javax.swing.JLabel();
+        AgregarLinea = new javax.swing.JLabel();
         ColocarSucursal = new javax.swing.JLabel();
         EstablecerParadas = new javax.swing.JLabel();
         MostrarGrafo = new javax.swing.JLabel();
@@ -44,14 +46,6 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        AgregarLinea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        AgregarLinea.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AgregarLineaMouseClicked(evt);
-            }
-        });
-        jPanel1.add(AgregarLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 320, 60));
 
         CargarButton.setFont(new java.awt.Font("Roboto Medium", 0, 36)); // NOI18N
         CargarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,31 +59,70 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(CargarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 220, 60));
 
+        Salir.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
+        Salir.setForeground(new java.awt.Color(255, 255, 255));
+        Salir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Salir.setText("SALIR ");
+        Salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SalirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SalirMouseEntered(evt);
+            }
+        });
+        jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 396, 350, 90));
+
+        AgregarLinea.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        AgregarLinea.setForeground(new java.awt.Color(255, 255, 255));
+        AgregarLinea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AgregarLinea.setText("Agregar Linea");
+        AgregarLinea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AgregarLinea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AgregarLineaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(AgregarLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 330, 60));
+
+        ColocarSucursal.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        ColocarSucursal.setForeground(new java.awt.Color(255, 255, 255));
+        ColocarSucursal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ColocarSucursal.setText("Colocar Sucursal");
         ColocarSucursal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ColocarSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ColocarSucursalMouseClicked(evt);
             }
         });
-        jPanel1.add(ColocarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 320, 40));
+        jPanel1.add(ColocarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 330, 60));
 
+        EstablecerParadas.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        EstablecerParadas.setForeground(new java.awt.Color(255, 255, 255));
+        EstablecerParadas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EstablecerParadas.setText("Establecer Rango");
         EstablecerParadas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         EstablecerParadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EstablecerParadasMouseClicked(evt);
             }
         });
-        jPanel1.add(EstablecerParadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 320, 40));
+        jPanel1.add(EstablecerParadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 330, 60));
 
+        MostrarGrafo.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        MostrarGrafo.setForeground(new java.awt.Color(255, 255, 255));
+        MostrarGrafo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MostrarGrafo.setText("Mostrar Grafo");
         MostrarGrafo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MostrarGrafo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MostrarGrafoMouseClicked(evt);
             }
         });
-        jPanel1.add(MostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 320, 40));
+        jPanel1.add(MostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 330, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/MenuDef.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/MenuCompleto.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,6 +187,14 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_AgregarLineaMouseClicked
 
+    private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_SalirMouseClicked
+
+    private void SalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseEntered
+        //nada lo intente
+    }//GEN-LAST:event_SalirMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -195,6 +236,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel ColocarSucursal;
     private javax.swing.JLabel EstablecerParadas;
     private javax.swing.JLabel MostrarGrafo;
+    private javax.swing.JLabel Salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
