@@ -4,6 +4,9 @@
  */
 package com.interfaz;
 
+import com.sucursales.AlmacenRed;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xc2do
@@ -28,6 +31,7 @@ public class EstablecerCobertura extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         T = new javax.swing.JTextField();
+        CambiarT = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Retroceder = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -39,6 +43,14 @@ public class EstablecerCobertura extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(T, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 90, -1));
 
+        CambiarT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CambiarT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CambiarTMouseClicked(evt);
+            }
+        });
+        jPanel1.add(CambiarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 90, 30));
+
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Rango actual: 3");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -47,6 +59,7 @@ public class EstablecerCobertura extends javax.swing.JFrame {
         Retroceder.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         Retroceder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Retroceder.setText("Menu");
+        Retroceder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Retroceder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RetrocederMouseClicked(evt);
@@ -77,6 +90,16 @@ public class EstablecerCobertura extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RetrocederMouseClicked
+
+    private void CambiarTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CambiarTMouseClicked
+        try {
+            int nuevoValorT = Integer.parseInt(T.getText());
+            AlmacenRed.setT(nuevoValorT);
+            JOptionPane.showMessageDialog(this, "El valor de t ha sido actualizado a " + nuevoValorT, "Valor Actualizado", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_CambiarTMouseClicked
 
     /**
      * @param args the command line arguments
@@ -114,6 +137,7 @@ public class EstablecerCobertura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CambiarT;
     private javax.swing.JLabel Retroceder;
     private javax.swing.JTextField T;
     private javax.swing.JLabel jLabel1;
