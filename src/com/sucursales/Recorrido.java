@@ -4,16 +4,13 @@
  */
 package com.sucursales;
 
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.Node;
-
 /**
  *
  * @author yilup
  */
 public class Recorrido {
 
-    public void realizarDFS(Graph graph, NodoGrafo nodoActual, int t) {
+    public void realizarDFS(NodoGrafo nodoActual, int t) {
         if (nodoActual == null) {
             System.out.println("El nodo actual es nulo.");
             return;
@@ -25,7 +22,7 @@ public class Recorrido {
         visitados.agregar(nodoActual.getNombre());
 
         int nivel = 0;
-        
+
         while (!pila.isEmpty() && nivel <= t) {
             int tamañoNivel = 0;
             NodoGrafo[] nodosNivel = new NodoGrafo[100];
@@ -38,7 +35,7 @@ public class Recorrido {
             for (int i = 0; i < tamañoNivel; i++) {
                 NodoGrafo actual = nodosNivel[i];
                 actual.establecerCubierto(true); //marcamos el nodo como cubierto
-                
+
                 for (Nodo<NodoGrafo> conexion = actual.getConexiones().getHead(); conexion != null; conexion = conexion.getNext()) {
                     NodoGrafo vecino = conexion.getElement();
                     if (!visitados.contiene(vecino.getNombre())) {
@@ -90,8 +87,8 @@ public class Recorrido {
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             if (nodoGrafo.esSucursal()) {
-                realizarBFS(nodoGrafo, t);
+                realizarDFS(nodoGrafo, t);
             }
         }
     }
-}   
+}
