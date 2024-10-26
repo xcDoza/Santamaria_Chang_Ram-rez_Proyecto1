@@ -137,18 +137,13 @@ public class ColocarSucursal extends javax.swing.JFrame {
         NodoGrafo nodo = grafo.obtenerNodoPorNombre(estacionSeleccionada);
 
         if (nodo != null) {
-            nodo.establecerSucursal(true);
+            nodo.establecerSucursal(true);//se crea una sucursal
             actualizarTextoSucursales(grafo);
             JOptionPane.showMessageDialog(this, "Sucursal colocada en " + estacionSeleccionada, "Sucursal Colocada", JOptionPane.INFORMATION_MESSAGE);
 
-            int rangoCobertura = AlmacenRed.getT();//aqui se obteniene el rango de cobertura desde AlmacenRed
-            Recorrido recorrer = new Recorrido();
-            Graph visualGraph = VisualizadorGrafo.getGraph();
-            if (visualGraph != null) {
-                recorrer.realizarBFS(visualGraph, nodo, rangoCobertura); //pasamos el grafo visual y el rango como parámetros
-            } else {
-                System.out.println("El grafo visual no se ha inicializado correctamente.");
-            }
+            //se actualiza la cobertura 
+            Recorrido recorrido = new Recorrido();
+            recorrido.determinarCoberturaComercial(grafo); //determinar cobertura en el grafo de datos
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró la estación " + estacionSeleccionada, "Error", JOptionPane.ERROR_MESSAGE);
         }

@@ -63,8 +63,4 @@ public class VisualizadorGrafo {
         //con esta linea evitamos que todas las ventanas se cierren al cerrar el grafo
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }
-
-    public static Graph getGraph() {
-        return graph;
-    }
 }

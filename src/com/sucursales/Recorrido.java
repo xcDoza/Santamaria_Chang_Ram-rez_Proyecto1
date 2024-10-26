@@ -52,8 +52,8 @@ public class Recorrido {
     }
 
     //YA FUNCIONA
-    public void realizarBFS(Graph graph, NodoGrafo nodoInicial, int t) {
-        if (nodoInicial == null || graph == null) {
+    public void realizarBFS(NodoGrafo nodoInicial, int t) {
+        if (nodoInicial == null) {
             System.out.println("Nodo inicial o grafo es nulo.");
             return;
         }
@@ -84,15 +84,14 @@ public class Recorrido {
         }
     }
 
-    public void determinarCoberturaComercial(Graph graph, Grafo grafo) {
+    public void determinarCoberturaComercial(Grafo grafo) {
         int t = AlmacenRed.getT(); //obtener el rango de cobertura desde AlmacenRed
 
-        //realizamos BFS desde cada sucursal para determinar la cobertura y esto solo afecta a la parte visual cuando mostramos el grafo
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             if (nodoGrafo.esSucursal()) {
-                realizarBFS(graph, nodoGrafo, t);
+                realizarBFS(nodoGrafo, t);
             }
         }
     }
-}
+}   
