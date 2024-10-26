@@ -4,14 +4,26 @@
  */
 package com.sucursales;
 
+/**
+ * La clase {@code Recorrido} realiza diferentes tipos de recorridos (DFS y BFS) en un grafo,
+ * determina la cobertura comercial de las sucursales y sugiere nuevas ubicaciones
+ * para cubrir áreas no atendidas.
+ */
 public class Recorrido {
 
+    /**
+     * Realiza un recorrido en profundidad (DFS) en el grafo a partir de un nodo específico.
+     * Marca los nodos en el rango de cobertura especificado como cubiertos.
+     *
+     * @param nodoActual El nodo inicial para comenzar el DFS.
+     * @param t El rango de cobertura, en niveles, a considerar.
+     */
     public void realizarDFS(NodoGrafo nodoActual, int t) {
         if (nodoActual == null) {
             System.out.println("El nodo actual es nulo.");
             return;
         }
-        
+
         System.out.println("recorrido dfs hecho");
         Conjunto<String> visitados = new Conjunto<>();
         Pilas pila = new Pilas(100);
@@ -31,7 +43,7 @@ public class Recorrido {
 
             for (int i = 0; i < tamañoNivel; i++) {
                 NodoGrafo actual = nodosNivel[i];
-                actual.establecerCubierto(true); //marcamos el nodo como cubierto
+                actual.establecerCubierto(true);
 
                 for (Nodo<NodoGrafo> conexion = actual.getConexiones().getHead(); conexion != null; conexion = conexion.getNext()) {
                     NodoGrafo vecino = conexion.getElement();
@@ -45,15 +57,21 @@ public class Recorrido {
         }
     }
 
-    //YA FUNCIONA
+    /**
+     * Realiza un recorrido en anchura (BFS) en el grafo a partir de un nodo específico.
+     * Marca los nodos en el rango de cobertura especificado como cubiertos.
+     *
+     * @param nodoInicial El nodo inicial para comenzar el BFS.
+     * @param t El rango de cobertura, en niveles, a considerar.
+     */
     public void realizarBFS(NodoGrafo nodoInicial, int t) {
         if (nodoInicial == null) {
             System.out.println("Nodo inicial o grafo es nulo.");
             return;
         }
-        
+
         System.out.println("recorrido bfs hecho");
-        Cola cola = new Cola(100); //ajusta la capacidad según sea necesario
+        Cola cola = new Cola(100);
         Conjunto<String> visitados = new Conjunto<>();
         cola.encolar(nodoInicial);
         visitados.agregar(nodoInicial.getNombre());
@@ -61,11 +79,11 @@ public class Recorrido {
         int nivel = 0;
 
         while (!cola.estaVacia() && nivel <= t) {
-            int tamañoNivel = cola.getTamaño(); //tamaño de la cola al inicio de cada nivel
+            int tamañoNivel = cola.getTamaño();
 
             for (int i = 0; i < tamañoNivel; i++) {
                 NodoGrafo actual = cola.desencolar();
-                actual.establecerCubierto(true); //marcar el nodo como cubierto
+                actual.establecerCubierto(true);
 
                 for (Nodo<NodoGrafo> conexion = actual.getConexiones().getHead(); conexion != null; conexion = conexion.getNext()) {
                     NodoGrafo vecino = conexion.getElement();
@@ -79,32 +97,51 @@ public class Recorrido {
         }
     }
 
+    /**
+     * Determina la cobertura comercial de las sucursales en un grafo.
+     * Realiza un recorrido BFS o DFS desde cada nodo marcado como sucursal
+     * según el tipo de recorrido especificado en {@code AlmacenRed}.
+     *
+     * @param grafo El grafo de la red de transporte.
+     */
     public void determinarCoberturaComercial(Grafo grafo) {
-        int t = AlmacenRed.getT(); //obtener el rango de cobertura desde AlmacenRed
-        String tipoRecorrido = AlmacenRed.getTipoRecorrido();//con esto se obtiene el tipo de recorrido
+        int t = AlmacenRed.getT();
+        String tipoRecorrido = AlmacenRed.getTipoRecorrido();
 
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             if (nodoGrafo.esSucursal()) {
                 if ("BFS".equals(tipoRecorrido)) {
-                    realizarBFS(nodoGrafo, t);//realizar BFS
+                    realizarBFS(nodoGrafo, t);
                 } else if ("DFS".equals(tipoRecorrido)) {
-                    realizarDFS(nodoGrafo, t);//realizar DFS
+                    realizarDFS(nodoGrafo, t);
                 }
             }
         }
     }
 
+    /**
+     * Verifica si todas las estaciones están dentro del rango de cobertura de al menos una sucursal.
+     *
+     * @param grafo El grafo de la red de transporte.
+     * @return {@code true} si todas las estaciones están cubiertas; {@code false} en caso contrario.
+     */
     public boolean revisarCoberturaTotal(Grafo grafo) {
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             if (!nodoGrafo.estaCubierto() && !nodoGrafo.esSucursal()) {
-                return false; // Si hay alguna parada no cubierta, la cobertura no es total
+                return false;
             }
         }
-        return true; // Todas las paradas están cubiertas
+        return true;
     }
 
+    /**
+     * Sugiere nuevas ubicaciones para establecer sucursales en estaciones no cubiertas.
+     *
+     * @param grafo El grafo de la red de transporte.
+     * @return Una lista de nombres de estaciones sugeridas para nuevas sucursales.
+     */
     public Lista<String> sugerirNuevasSucursales(Grafo grafo) {
         Lista<String> sugerencias = new Lista<>();
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {

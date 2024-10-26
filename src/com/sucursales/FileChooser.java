@@ -19,8 +19,20 @@ import java.io.IOException;
  *
  * @author xc2do
  */
+/**
+ * La clase {@code FileChooser} permite al usuario seleccionar un archivo JSON que
+ * representa una red de transporte y cargar su contenido en una instancia de
+ * {@link RedDeTransporte}. Utiliza la librería Gson para el análisis del JSON.
+ */
 public class FileChooser {
 
+    /**
+     * Abre un cuadro de diálogo para que el usuario seleccione un archivo JSON, lo lee
+     * y convierte su contenido en una instancia de {@link RedDeTransporte}.
+     *
+     * @return La instancia de {@code RedDeTransporte} construida a partir del archivo JSON,
+     *         o {@code null} si ocurre un error o si no se selecciona un archivo.
+     */
     public RedDeTransporte loadRedTransporte() {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
@@ -36,21 +48,26 @@ public class FileChooser {
                     jsonString.append(line);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                return null; // Manejo de errores
+                return null;
             }
 
-            // Usar Gson para convertir el JSON a RedDeTransporte
+            
             return parseTransportNetwork(jsonString.toString());
         }
-        return null; // Si no se seleccionó ningún archivo
+        return null;
     }
 
+    /**
+     * Convierte una cadena JSON en una instancia de {@link RedDeTransporte}.
+     *
+     * @param jsonString La cadena JSON que representa la red de transporte.
+     * @return La instancia de {@code RedDeTransporte} creada a partir del JSON.
+     */
     private RedDeTransporte parseTransportNetwork(String jsonString) {
         Gson gson = new GsonBuilder().create();
         RedDeTransporte transportNetwork = null;
 
-        // Convertir el JSON a JsonObject
+        
         JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
 
         for (String redName : jsonObject.keySet()) {
@@ -65,11 +82,11 @@ public class FileChooser {
 
                     for (JsonElement stationElement : stationsElement.getAsJsonArray()) {
                         if (stationElement.isJsonPrimitive()) {
-                            // Si es un nombre de estación
+                            
                             String stationName = stationElement.getAsString();
                             linea.agregarEstacion(new Estacion(stationName));
                         } else if (stationElement.isJsonObject()) {
-                            // Si es una conexión
+                            
                             JsonObject connection = stationElement.getAsJsonObject();
                             for (String station : connection.keySet()) {
                                 String connectedStation = connection.get(station).getAsString();

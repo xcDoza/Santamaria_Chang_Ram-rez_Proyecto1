@@ -4,40 +4,77 @@
  */
 package com.sucursales;
 
+/**
+ * La clase {@code Grafo} representa un grafo no dirigido compuesto por nodos
+ * que representan estaciones en una red de transporte. Proporciona métodos
+ * para agregar nodos y conexiones entre ellos, y permite construir un grafo
+ * a partir de una instancia de {@link RedDeTransporte}.
+ */
 public class Grafo {
 
-    private Lista<NodoGrafo> nodos; // Lista de estaciones (nodos)
+    /** Lista de nodos en el grafo, donde cada nodo representa una estación. */
+    private Lista<NodoGrafo> nodos;
 
+    /**
+     * Construye un grafo vacío.
+     */
     public Grafo() {
         this.nodos = new Lista<>();
     }
 
-    // Añadir un nodo al grafo
+    /**
+     * Agrega un nodo al grafo.
+     *
+     * @param nodo El nodo a agregar al grafo.
+     */
     public void agregarNodo(NodoGrafo nodo) {
         nodos.agregar(nodo);
     }
 
-    // Método para obtener la lista de nodos del grafo
+    /**
+     * Obtiene la lista de nodos en el grafo.
+     *
+     * @return La lista de nodos en el grafo.
+     */
     public Lista<NodoGrafo> getNodos() {
         return nodos;
     }
 
-    // Añadir una conexión (arista) entre dos nodos
+    /**
+     * Agrega una conexión (arista) entre dos nodos en el grafo.
+     * En un grafo no dirigido, agrega la conexión en ambos sentidos.
+     *
+     * @param origen  El nodo de origen de la conexión.
+     * @param destino El nodo de destino de la conexión.
+     */
     public void agregarArista(NodoGrafo origen, NodoGrafo destino) {
         origen.agregarConexion(destino);
         destino.agregarConexion(origen); // Si es un grafo no dirigido
     }
 
+    /**
+     * Busca y obtiene un nodo en el grafo a partir de su nombre.
+     *
+     * @param nombre El nombre del nodo a buscar.
+     * @return El nodo correspondiente al nombre, o {@code null} si no se encuentra.
+     */
     public NodoGrafo obtenerNodoPorNombre(String nombre) {
         for (Nodo<NodoGrafo> nodo = nodos.getHead(); nodo != null; nodo = nodo.getNext()) {
             if (nodo.getElement().getNombre().equals(nombre)) {
                 return nodo.getElement();
             }
         }
-        return null; // Retorna null si no encuentra el nodo
+        return null;
     }
 
-    // Método para construir el grafo a partir de la RedDeTransporte
+    /**
+     * Construye un grafo a partir de una instancia de {@link RedDeTransporte}.
+     * Cada estación se convierte en un nodo del grafo, y se crean conexiones
+     * entre estaciones según se define en la red de transporte.
+     *
+     * @param red La red de transporte desde la cual construir el grafo.
+     * @return El grafo construido.
+     */
     public static Grafo construirGrafo(RedDeTransporte red) {
         Grafo grafo = new Grafo();
 
@@ -83,6 +120,12 @@ public class Grafo {
         return grafo;
     }
 
+    /**
+     * Agrega una conexión entre dos estaciones especificadas por su nombre.
+     *
+     * @param estacion1 El nombre de la primera estación.
+     * @param estacion2 El nombre de la segunda estación.
+     */
     public void agregarConexion(String estacion1, String estacion2) {
         NodoGrafo nodo1 = obtenerNodoPorNombre(estacion1);
         NodoGrafo nodo2 = obtenerNodoPorNombre(estacion2);

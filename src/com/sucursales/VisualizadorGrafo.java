@@ -13,43 +13,59 @@ import org.graphstream.ui.view.Viewer;
  *
  * @author xc2do
  */
+/**
+ * La clase {@code VisualizadorGrafo} proporciona un método para visualizar un grafo utilizando la biblioteca GraphStream.
+ * Visualiza los nodos y las conexiones del grafo, destacando los nodos que representan sucursales y los que están cubiertos.
+ */
 public class VisualizadorGrafo {
 
     private static Graph graph;
 
+    /**
+     * Visualiza el grafo proporcionado en una ventana de GraphStream.
+     * Cada nodo del grafo será coloreado de acuerdo con sus atributos:
+     * <ul>
+     *     <li>Rojo para los nodos que representan sucursales.</li>
+     *     <li>Verde para los nodos que están dentro del rango de cobertura.</li>
+     *     <li>Gris para los nodos restantes.</li>
+     * </ul>
+     * Las conexiones entre nodos se muestran como aristas en el grafo.
+     *
+     * @param grafo El grafo de transporte que se desea visualizar.
+     */
     public static void visualizar(Grafo grafo) {
         graph = new SingleGraph("Grafo de Transporte");
 
-        //añadir nodos de Grafo a GraphStream
+        // Añadir nodos del grafo a GraphStream
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             Node graphNode = graph.addNode(nodoGrafo.getNombre());
             graphNode.setAttribute("ui.label", nodoGrafo.getNombre());
 
-            //tinta os nodos de rojo si son sucursales
+            // Colorea los nodos según sus atributos
             if (nodoGrafo.esSucursal()) {
                 graphNode.setAttribute("ui.class", "sucursal");
-
-            } //tinta los nodos de verde si estan en el rango de cobertura
-            else if (nodoGrafo.estaCubierto()) {
+            } else if (nodoGrafo.estaCubierto()) {
                 graphNode.setAttribute("ui.class", "cubierto");
             }
         }
 
-        //añadir aristas de Grafo a GraphStream
+        // Añadir aristas entre nodos en GraphStream
         for (Nodo<NodoGrafo> nodo = grafo.getNodos().getHead(); nodo != null; nodo = nodo.getNext()) {
             NodoGrafo nodoGrafo = nodo.getElement();
             Lista<NodoGrafo> conexiones = nodoGrafo.getConexiones();
             for (Nodo<NodoGrafo> conexion = conexiones.getHead(); conexion != null; conexion = conexion.getNext()) {
                 NodoGrafo nodoConexion = conexion.getElement();
                 String edgeId = nodoGrafo.getNombre() + "-" + nodoConexion.getNombre();
+                
+                // Evitar duplicación de aristas
                 if (graph.getEdge(edgeId) == null && graph.getEdge(nodoConexion.getNombre() + "-" + nodoGrafo.getNombre()) == null) {
                     graph.addEdge(edgeId, nodoGrafo.getNombre(), nodoConexion.getNombre());
                 }
             }
         }
 
-        // Añadir estilos CSS directamente en el código Java
+        // Definir el estilo CSS para los elementos del grafo
         String css = "graph { fill-color: white; }"
                 + "node { fill-color: gray; text-mode: normal; }"
                 + "node.sucursal { fill-color: red; }"
@@ -57,10 +73,9 @@ public class VisualizadorGrafo {
                 + "edge { fill-color: black; }";
         graph.setAttribute("ui.stylesheet", css);
 
+        // Mostrar el grafo utilizando una ventana de GraphStream
         System.setProperty("org.graphstream.ui", "swing");
         Viewer viewer = graph.display();
-
-        //con esta linea evitamos que todas las ventanas se cierren al cerrar el grafo
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }
 }
